@@ -19,10 +19,13 @@ class DataValidation:
             self.data_validation_config = data_validation_config
             self.data_ingestion_artifact = data_ingestion_artifact
             self.schema_path = self.data_validation_config.schema_file_path
+            self.train_filepath=self.data_ingestion_artifact.train_file_path
+            self.test_filepath=self.data_ingestion_artifact.test_file_path
             self.train_data = IngestedDataValidation(
                 validate_path=self.data_ingestion_artifact.train_file_path, schema_path=self.schema_path)
             self.test_data = IngestedDataValidation(
                 validate_path=self.data_ingestion_artifact.test_file_path, schema_path=self.schema_path)
+            self.data_files="satus"
         except Exception as e:
             raise CustomException(e, sys) from e
 
@@ -88,9 +91,13 @@ class DataValidation:
                         "Check your Training data! Validation failed")
 
                 if is_test_filename_validated & is_test_column_numbers_validated & is_test_column_name_same & is_test_missing_values_whole_column:
+                    self.data_files="Inserted"
+
+                    
                     pass
                 else:
                     validation_status = False
+                    self.data_files="Not_inserted"
                     logging.info("Check your Test data! Validation failed")
                     raise ValueError(
                         "Check your Testing data! Validation failed")
@@ -106,7 +113,10 @@ class DataValidation:
         try:
             data_validation_artifact = DataValidationArtifact(
                 schema_file_path=self.schema_path, is_validated=self.is_Validation_successfull(),
-                message="Data validation performed"
+                message="Data validation performed",
+                validated_data=self.data_files,
+                validated_test_path=self.train_filepath,
+                validated_train_path=self.test_filepath
             )
             logging.info(
                 f"Data validation artifact: {data_validation_artifact}")
