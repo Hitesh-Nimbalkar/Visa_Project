@@ -2,4 +2,7 @@ pymongo
 pandas
 numpy 
 flask
+pyyaml
+dill
+sklearn 
 -e .
