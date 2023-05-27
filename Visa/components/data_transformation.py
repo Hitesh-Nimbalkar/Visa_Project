@@ -162,9 +162,14 @@ class DataTransformation:
             save_numpy_array_data(file_path=transformed_test_file_path, array=test_arr)
 
             preprocessing_obj_file_path = self.data_transformation_config.preprocessed_object_file_path
+            
+            
 
             logging.info(f"Saving preprocessing object.")
             save_object(file_path=preprocessing_obj_file_path, obj=preprocessing_obj)
+            PREPROCESSED_FILE='preprocessed_files'
+            file_path=os.path.join(ROOT_DIR,PREPROCESSED_FILE,DATA_TRANSFORMATION_PREPROCESSED_FILE_NAME_KEY)
+            save_object(file_path=file_path,obj=preprocessing_obj)
 
             data_transformation_artifact = DataTransformationArtifact(is_transformed=True,
                                                                       message="Data transformation successfull.",
