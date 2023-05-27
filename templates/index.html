@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visa Project</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Training Pipeline</h2>
+        <form action="/train" id="trainForm">
+            <button type="submit">Run Training Pipeline</button>
+        </form>
+
+        <hr>
+
+        <h2>Bucket Upload</h2>
+        <form action="/upload" id="uploadForm">
+            <button type="submit">Upload to Bucket</button>
+        </form>
+
+        <hr>
+
+        <h2>Batch Prediction</h2>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit">Upload and Predict</button>
+        </form>
+        <hr>
+
+        <h2>Result</h2>
+        <div id="result">
+            <div class="loader"></div>
+        </div>
+    </div>
+</body>
+</html>

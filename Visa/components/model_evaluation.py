@@ -43,6 +43,8 @@ class ModelEvaluation:
 
             if BEST_MODEL_KEY not in model_eval_file_content:
                 return model
+            
+            print("********************")
 
             model = load_object(file_path=model_eval_file_content[BEST_MODEL_KEY][MODEL_PATH_KEY])
             return model
